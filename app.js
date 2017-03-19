@@ -14,6 +14,8 @@ var searchuserinfo = require('./routes/searchuserinfo');
 var edu = require('./routes/edu');
 var updatapassword = require('./routes/updatapassword');
 var logout = require('./routes/logout');
+var updatapwDao = require('./routes/updatapwDao');
+var personDAO = require('./routes/personDAO');
 
 var app = express();
 
@@ -43,12 +45,17 @@ app.use('/edu', edu);
 //登陆查询
 app.use('/logincheck', logincheck);
 
+//个人档案
+app.use('/personDAO', personDAO);
+
 //员工信息查询
 app.use('/userinfo', userinfo);
+app.use('/searchuserinfo', searchuserinfo);
 
 
 //修改密码
 app.use('/updatapassword', updatapassword);
+app.use('/updatapwDao', updatapwDao);
 
 //注销用户
 app.use('/logout', logout);

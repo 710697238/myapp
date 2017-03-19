@@ -27,6 +27,7 @@ login.post('/', function (req, res ) {
                 //登录成功
                 console.log("用户名是"+rows[0].UserName)
                 req.session.user = rows[0].UserName;
+                req.session.userid = rows[0].UserID;
                 res.send('20020');
               }else
               res.send('40030');

@@ -1,0 +1,23 @@
+span.label.label-success 当前路径：个人档案
+br
+dl.dl-horizontal
+    h4
+        dt 名字
+        dd #{personinfo.name}
+        dt 性别
+        if(personinfo.sex=='1')
+            dd 男
+        if(personinfo.sex=='2')
+            dd 女
+        dt 年龄
+        dd #{personinfo.age}
+        dt 部门
+        dd #{personinfo.dep}
+        dt 职位
+        dd #{personinfo.job}
+        dt 在职
+        if(personinfo.onjob=='1')
+            dd 在职
+        if(personinfo.onjob=='-1')
+            dd 离职
+    

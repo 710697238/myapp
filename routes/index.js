@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var sessioncheck = require('./sessioncheck');
 
 
 /* GET home page. */
@@ -23,7 +24,7 @@ router.get('/', function(req, res, next) {
     var settitle = ''
     console.log(req.session.user)
 		//解析cookie获取cookieUser，略去
-		if(req.session && req.session.user){
+		if(sessioncheck.check(req, res)){
 			settitle = req.session.user;
       res.render('index', { title: settitle });
 		}

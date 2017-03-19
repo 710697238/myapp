@@ -2,9 +2,9 @@ ul.nav.nav-pills.nav-stacked
     li.active(role="presentation" )
         a(href="#" onClick="personaldoc()") 个人档案
     li(role="presentation" )
-        a(href="#" onClick="personaldoc()") 员工信息
+        a(href="#" onClick="epleedoc()") 员工信息
     li(role="presentation" )
-        a(href="#" onClick="personaldoc()") 员工档案
+        a(href="#" onClick="epleedoc()") 员工档案
 ul.nav.nav-pills.nav-stacked
     li.active(role="presentation" )
         a(href="#" onClick="education()") 教育培训
@@ -14,6 +14,13 @@ ul.nav.nav-pills.nav-stacked
         a(href="#" onClick="edurecode()") 培训记录
 script.
         function personaldoc() { 
+            console.log("personaldoc")
+            $.post("./personDAO", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function epleedoc() { 
             console.log("????")
             $.get("./userinfo", function(result){
             $("#content2").html(result);
@@ -21,7 +28,7 @@ script.
         }
 
         function education() { 
-            console.log("????")
+            console.log("education")
             $.get("./edu", function(result){
             $("#content2").html(result);
         });
