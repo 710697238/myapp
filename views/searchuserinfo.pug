@@ -1,6 +1,6 @@
-table.table.table-striped
+table.table.table-condensed.table-hover
     tr
-        th 人员id
+        th 人员ID
         th 名字
         th 性别
         th 年龄
@@ -9,7 +9,7 @@ table.table.table-striped
         th 在职
         th 操作
     each item in userinfo
-        tr
+        tr(id=item.UserID)
             td #{item.UserID}
             td #{item.name}
             if(item.sex=='1')
@@ -19,6 +19,13 @@ table.table.table-striped
             td #{item.age}
             td #{item.dep}
             td #{item.job}
-            td #{item.onjob}
-            td 修改
+            if(item.onjob=='1')
+                td 在职
+            if(item.onjob=='-1')
+                td.danger 离职
+            td.btn.btn-primary(onclick="updatainfo("+item.UserID+")") 修改
+script.
+        function updatainfo(id) {
+            console.log(id)
+        }
         

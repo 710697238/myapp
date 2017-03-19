@@ -7,7 +7,12 @@ var pool = require('./pool.js');
 searchuserinfo.post('/', function (req, res ) {
   var sertype=req.body.sertype;
   var seacontent=req.body.seacontent;
-  var strQue = 'SELECT * FROM userinfo WHERE' + ' '+ sertype  + ' '+' =' + ' \''+ seacontent + '\''
+  var strQue = '';
+  if(!seacontent){
+    strQue = 'SELECT * FROM userinfo'
+  }else{
+    strQue = 'SELECT * FROM userinfo WHERE' + ' '+ sertype  + ' '+' =' + ' \''+ seacontent + '\''
+  }
   console.log(strQue)
   pool.getConnection(function(err, connection) {
       if (err){

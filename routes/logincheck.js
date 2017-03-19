@@ -7,7 +7,7 @@ var pool = require('./pool.js');
 login.post('/', function (req, res ) {
   var username=req.body.username;
   var password=req.body.password;
-  var strQue = 'SELECT Password FROM Users WHERE UserID='+username +' LIMIT 1'  
+  var strQue = 'SELECT * FROM Users WHERE UserID='+username +' LIMIT 1'  
   pool.getConnection(function(err, connection) {
       if (err){
           console.log(err.stack);
@@ -25,7 +25,8 @@ login.post('/', function (req, res ) {
              }else{
               if(password==rows[0].Password){
                 //登录成功
-                req.session.user = username;
+                console.log("用户名是"+rows[0].UserName)
+                req.session.user = rows[0].UserName;
                 res.send('20020');
               }else
               res.send('40030');

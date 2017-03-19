@@ -12,6 +12,8 @@ var userinfo = require('./routes/userinfo');
 var logincheck = require('./routes/logincheck');
 var searchuserinfo = require('./routes/searchuserinfo');
 var edu = require('./routes/edu');
+var updatapassword = require('./routes/updatapassword');
+var logout = require('./routes/logout');
 
 var app = express();
 
@@ -36,14 +38,21 @@ app.use(session({
 
 app.use('/', index);
 app.use('/login', login);
-app.use('/userinfo', userinfo);
 app.use('/edu', edu);
 
 //登陆查询
 app.use('/logincheck', logincheck);
 
 //员工信息查询
-app.use('/searchuserinfo', searchuserinfo);
+app.use('/userinfo', userinfo);
+
+
+//修改密码
+app.use('/updatapassword', updatapassword);
+
+//注销用户
+app.use('/logout', logout);
+
 
 
 
