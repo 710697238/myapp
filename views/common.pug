@@ -1,0 +1,40 @@
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+        a(href="#" onClick="personaldoc()") 个人档案
+    li(role="presentation" )
+        a(href="#" onClick="personaldoc()") 员工信息
+    li(role="presentation" )
+        a(href="#" onClick="personaldoc()") 员工档案
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+        a(href="#" onClick="education()") 教育培训
+    li(role="presentation" )
+        a(href="#" onClick="updataedu()") 类别维护
+    li(role="presentation" )
+        a(href="#" onClick="edurecode()") 培训记录
+script.
+        function personaldoc() { 
+            console.log("????")
+            $.get("./userinfo", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function education() { 
+            console.log("????")
+            $.get("./edu", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function updataedu() { 
+            $.get("./edu", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function edurecode() { 
+            $.get("./edu", function(result){
+            $("#content2").html(result);
+        });
+        }

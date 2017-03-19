@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  div.row
+    div.col-md-2
+      h1= title
+      p Welcome to #{title}
+      div.alert.alert-danger#loginerror(style="display:none;" role="alert") 
+      div.input-group
+        span.input-group-addon 用户名
+        input.form-control#username(type="text" placeholder="请输入工号" aria-describedby="basic-addon1")
+      p
+      div.input-group
+        span.input-group-addon 密&nbsp;&nbsp;码
+        input.form-control#password(type="password" placeholder="请输入密码" aria-describedby="basic-addon1")
+      p
+      button.btn.btn-default#loginbtn(type="button" onclick="login()") 登陆
+      script.
+        function login() { 
+          var username = $('#username').val()
+          var password = $('#password').val()
+          if(!username){
+            console.log('登陆失败')
+            $('#loginerror').text('登陆名为空！');
+            $('#loginerror').show();
+            return;
+          }
+          if(!password){
+            $('#loginerror').text('密码为空！');
+            $('#loginerror').show();
+            return;
+          }
+          $.ajax({
+              url: './logincheck', 
+              type: 'POST', 
+              contentType: 'application/json', 
+              data: JSON.stringify({username: username, password: password }),
+              success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                //console.log(data)
+                if(data==40030){
+                    console.log('登陆失败')
+                    $('#loginerror').text('密码错误');
+                    $('#loginerror').show();
+                }
+                if(data==40050){
+                    $('#loginerror').text('用户名不存在');
+                    $('#loginerror').show();
+                }
+                if(data==50010){
+                    $('#loginerror').text('数据库连接失败');
+                    $('#loginerror').show();
+                }
+                if(data==20020){
+                    window.location.href='./';
+                }
+              }     
+        });
+        }

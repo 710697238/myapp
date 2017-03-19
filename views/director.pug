@@ -1,0 +1,38 @@
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+        a(href="#" onClick="depmanag()") 部门管理
+    li(role="presentation" )
+        a(href="#" onClick="depmanag()") 部门管理
+    li(role="presentation" )
+        a(href="#" onClick="jobmanag()") 职务管理
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+        a(href="#" onClick="hrsmanag()") 人事调配
+    li(role="presentation" )
+        a(href="#" onClick="hrsmanag()") 人事调动
+    li(role="presentation" )
+        a(href="#" onClick="addhrs()") 新增员工
+script.
+        function depmanag() {
+            $.get("./depmanag", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function jobmanag() {
+            $.get("./jobmanag", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function hrsmanag() {
+            $.get("./hrsmanag", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function addhrs() {
+            $.get("./addhrs", function(result){
+            $("#content2").html(result);
+        });
+        }

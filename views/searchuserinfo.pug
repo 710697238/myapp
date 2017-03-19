@@ -1,0 +1,24 @@
+table.table.table-striped
+    tr
+        th 人员id
+        th 名字
+        th 性别
+        th 年龄
+        th 部门
+        th 职位
+        th 在职
+        th 操作
+    each item in userinfo
+        tr
+            td #{item.UserID}
+            td #{item.name}
+            if(item.sex=='1')
+                td 男
+            if(item.sex=='2')
+                td 女
+            td #{item.age}
+            td #{item.dep}
+            td #{item.job}
+            td #{item.onjob}
+            td 修改
+        

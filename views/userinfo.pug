@@ -1,0 +1,54 @@
+div.alert.alert-danger#error(style="display:none;" role="alert") 
+.form-inline
+    .form-group
+    .row
+        .col-md-4
+            label(for="exampleInputName2") 查询方式：
+            select.form-control#sertype
+                option 按工号查询
+                option 按姓名查询
+        .col-md-4
+            input.form-control#seacontent(style="padding: 10px" placeholder="请输入查询内容")
+        .col-md-1
+            button.btn.btn-default(type="submit" onclick="searchuserinfo()") 提交
+br
+#results
+script.
+    $("input").focus(function () {
+        $('#error').slideUp()
+    });
+    
+    function searchuserinfo() {
+        var sertype = $('#sertype').val()
+        var seacontent = $('#seacontent').val()
+        console.log(sertype+seacontent)
+        if(!seacontent){
+            $('#error').text('查询字符为空');
+            $('#error').slideDown();
+            return;
+          }
+        if(sertype=='按工号查询'){
+            sertype = 'UserID'
+          }
+
+        if(sertype=='按姓名查询'){
+            sertype = 'name'
+          }
+
+        $.ajax({
+              url: './searchuserinfo', 
+              type: 'POST', 
+              contentType: 'application/json', 
+              data: JSON.stringify({sertype: sertype, seacontent: seacontent }),
+              success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                console.log(data)
+                $('#results').html(data)
+              }     
+        });
+    }
+
+        
+
+
+

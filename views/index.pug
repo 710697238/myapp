@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.page-header
+    span.label.label-success 欢迎你 #{title}
+    h1 华软人力资源管理系统   
+  div.row
+    div.col-md-2
+      include ./common
+      include ./director
+      include ./admin
+      include ./pub
+    div.col-md-1
+    div.col-md-8#content1
+      #content2
+        include ./userinfo
+

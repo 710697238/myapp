@@ -1,0 +1,13 @@
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+        a(href="#" onClick="usermanag()") 系统管理
+    li(role="presentation" )
+        a(href="#" onClick="usermanag()") 用户管理
+    li(role="presentation" )
+        a(href="#" onClick="usermanag()") 角色管理
+script.
+        function usermanag() {
+            $.get("./usermanag", function(result){
+            $("#content2").html(result);
+        });
+        }

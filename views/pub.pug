@@ -1,0 +1,19 @@
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+    a(href="#" onclick="updatapassword()") 修改密码
+br
+ul.nav.nav-pills.nav-stacked
+    li.active(role="presentation" )
+    a(href="#" onclick="logout()") 注销
+script.
+        function updatapassword() { 
+            $.get("./updatapassword", function(result){
+            $("#content2").html(result);
+        });
+        }
+
+        function logout() { 
+            $.get("./logout", function(result){
+            $("#content2").html(result);
+        });
+        }
