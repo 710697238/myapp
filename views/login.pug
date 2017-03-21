@@ -17,45 +17,48 @@ block content
       p
       button.btn.btn-default#loginbtn.navbar-btn(type="button" onclick="login()") 登陆
     div.col-md-4
-      script.
-        function login() { 
-          var username = $('#username').val()
-          var password = $('#password').val()
-          if(!username){
-            console.log('登陆失败')
-            $('#loginerror').text('登陆名为空！');
-            $('#loginerror').show();
-            return;
-          }
-          if(!password){
-            $('#loginerror').text('密码为空！');
-            $('#loginerror').show();
-            return;
-          }
-          $.ajax({
-              url: './logincheck', 
-              type: 'POST', 
-              contentType: 'application/json', 
-              data: JSON.stringify({username: username, password: password }),
-              success: function(data) {         
-                //var statcode = JSON.stringify(data)
-                //console.log(data)
-                if(data==40030){
+              script.
+                $('input').focus(function(){
+                  $('#loginerror').slideUp()
+                })
+                function login() { 
+                  var username = $('#username').val()
+                  var password = $('#password').val()
+                  if(!username){
                     console.log('登陆失败')
-                    $('#loginerror').text('密码错误');
+                    $('#loginerror').text('登陆名为空！');
                     $('#loginerror').show();
-                }
-                if(data==40050){
-                    $('#loginerror').text('用户名不存在');
+                    return;
+                  }
+                  if(!password){
+                    $('#loginerror').text('密码为空！');
                     $('#loginerror').show();
+                    return;
+                  }
+                  $.ajax({
+                      url: './logincheck', 
+                      type: 'POST', 
+                      contentType: 'application/json', 
+                      data: JSON.stringify({username: username, password: password }),
+                      success: function(data) {         
+                        //var statcode = JSON.stringify(data)
+                        //console.log(data)
+                        if(data==40030){
+                            console.log('登陆失败')
+                            $('#loginerror').text('密码错误');
+                            $('#loginerror').show();
+                        }
+                        if(data==40050){
+                            $('#loginerror').text('用户名不存在');
+                            $('#loginerror').show();
+                        }
+                        if(data==50010){
+                            $('#loginerror').text('数据库连接失败');
+                            $('#loginerror').show();
+                        }
+                        if(data==20020){
+                            window.location.href='./';
+                        }
+                      }     
+                });
                 }
-                if(data==50010){
-                    $('#loginerror').text('数据库连接失败');
-                    $('#loginerror').show();
-                }
-                if(data==20020){
-                    window.location.href='./';
-                }
-              }     
-        });
-        }

@@ -7,8 +7,10 @@ block content
   div.row
     div.col-md-2
       include ./common
-      include ./director
-      include ./admin
+      if(roleid<3)
+        include ./director
+      if(roleid<2)
+        include ./admin
       include ./pub
     div.col-md-1
     div.col-md-8#content1

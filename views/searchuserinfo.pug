@@ -27,5 +27,16 @@ table.table.table-condensed.table-hover
 script.
         function updatainfo(id) {
             console.log(id)
+            $.ajax({
+              url: './updatauserinfo', 
+              type: 'POST', 
+              contentType: 'application/json', 
+              data: JSON.stringify({id: id, type: 'userinfo' }),
+              success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                console.log(data)
+                $('#results').html(data)
+              }     
+        });
         }
         

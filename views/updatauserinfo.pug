@@ -1,0 +1,97 @@
+span.label.label-success 当前路径：修改、管理
+br
+br
+div.alert.alert-danger#error(style="display:none;" role="alert")
+form.form-horizontal
+    .form-group
+        label.col-sm-2.control-label 工号
+        .row
+            .col-lg-6
+                .col-sm-10
+                    span.label.label-success.tip#tip2(role="alert") #{userinfo.UserID}
+    .form-group
+        label.col-sm-2.control-label 姓名
+        .row
+            .col-lg-6
+                .col-sm-10
+                    span.label.label-success.tip#tip2(role="alert")  #{userinfo.name}
+    .form-group
+        label.col-sm-2.control-label 性别
+        .row
+            .col-lg-6
+                .col-sm-10
+                    
+.form-group
+    .row
+            .col-lg-6
+                .col-sm-offset-2.col-sm-10
+                    button.btn.btn-default.navbar-btn(onclick="updatauserinfo()") 提交
+br
+#results
+script.
+    $("input").focus(function () {
+        $('#error').slideUp()
+    });
+    
+    $("#inputPassword3").focus(function () {
+        $('.tip').hide()
+    })
+
+    $("#inputPassword5").focus(function () {
+        $('.tip').hide()
+    })
+
+    $("#inputPassword5").blur(function(){
+        var pw1 = $("#inputPassword4").val();
+        var pw2 = $("#inputPassword5").val();
+        if(pw1!=pw2){
+            $('#tip3').show();
+            return;
+        }
+    })
+
+    //原始密码不对立刻返回
+    $("#inputPassword3").blur(function(){
+        var pw = $("#inputPassword3").val();
+        if(!pw){
+            $('#tip1').val("输入为空");
+            $('#tip1').show();
+            return;
+        }
+        $.ajax({
+              url: './updatapwDao', 
+              type: 'POST', 
+              contentType: 'application/json', 
+              data: JSON.stringify({oldpw: pw, checkoldpw: true }),
+              success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                console.log(data)
+                if(data!='20020') $('#tip1').show();
+                if(data=='20020') $('#tip2').show();
+              }     
+        });
+    })
+
+    function updatauserinfo() {
+        var newpw = $("#inputPassword4").val();
+        var newpw1 = $("#inputPassword5").val();
+        if(!newpw||!newpw1){
+            $('#tip4').show();
+            return;
+        }
+        $.ajax({
+              url: './', 
+              type: 'POST', 
+              contentType: 'application/json', 
+              data: JSON.stringify({newpw: newpw, checkoldpw: false }),
+              success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                console.log(data)
+                if(data==20020){
+                    setTimeout(function(){
+                    window.location.href='./';
+                  },1000);
+                }
+              }     
+        });
+    }

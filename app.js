@@ -16,6 +16,12 @@ var updatapassword = require('./routes/updatapassword');
 var logout = require('./routes/logout');
 var updatapwDao = require('./routes/updatapwDao');
 var personDAO = require('./routes/personDAO');
+var depmanag = require('./routes/depmanag');
+var jobmanag = require('./routes/jobmanag');
+var hrsmanag = require('./routes/hrsmanag');
+var addhrs = require('./routes/addhrs');
+var usermanag = require('./routes/usermanag');
+var updatauserinfo = require('./routes/updatauserinfo');
 
 var app = express();
 
@@ -40,6 +46,8 @@ app.use(session({
 
 app.use('/', index);
 app.use('/login', login);
+
+//教育培训
 app.use('/edu', edu);
 
 //登陆查询
@@ -60,7 +68,23 @@ app.use('/updatapwDao', updatapwDao);
 //注销用户
 app.use('/logout', logout);
 
+//部门管理
+app.use('/depmanag', depmanag);
 
+//职务管理
+app.use('/jobmanag', jobmanag);
+
+//人事调配
+app.use('/hrsmanag', hrsmanag);
+
+//新增员工
+app.use('/addhrs', addhrs);
+
+//系统管理
+app.use('/usermanag', usermanag);
+
+//信息修改页面
+app.use('/updatauserinfo', updatauserinfo);
 
 
 // catch 404 and forward to error handler

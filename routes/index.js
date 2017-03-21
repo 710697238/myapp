@@ -3,7 +3,7 @@ var router = express.Router();
 var sessioncheck = require('./sessioncheck');
 
 
-/* GET home page. */
+/* post home page. */
 router.post('/', function(req, res, next) {
 
     var settitle = ''
@@ -26,7 +26,8 @@ router.get('/', function(req, res, next) {
 		//解析cookie获取cookieUser，略去
 		if(sessioncheck.check(req, res)){
 			settitle = req.session.user;
-      res.render('index', { title: settitle });
+      var roleid = req.session.roleid;
+      res.render('index', { title: settitle, roleid: roleid });
 		}
     else {
 			res.clearCookie("user",{});
