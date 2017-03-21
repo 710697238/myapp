@@ -8,6 +8,7 @@ searchuserinfo.post('/', function (req, res ) {
   var sertype=req.body.sertype;
   var seacontent=req.body.seacontent;
   var strQue = '';
+  var roleid = req.session.roleid;
   if(!seacontent){
     strQue = 'SELECT * FROM userinfo'
   }else{
@@ -32,7 +33,7 @@ searchuserinfo.post('/', function (req, res ) {
               if(rows.length>0){
                 //登录成功
                 console.log(rows)
-                res.render('searchuserinfo', { userinfo: rows });
+                res.render('searchuserinfo', { userinfo: rows, roleid: roleid  });
               }else
               //没有此人
               res.send('没有查到此人信息');

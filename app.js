@@ -22,6 +22,7 @@ var hrsmanag = require('./routes/hrsmanag');
 var addhrs = require('./routes/addhrs');
 var usermanag = require('./routes/usermanag');
 var updatauserinfo = require('./routes/updatauserinfo');
+var updateuserinfoDAO = require('./routes/updateuserinfoDAO');
 
 var app = express();
 
@@ -85,6 +86,7 @@ app.use('/usermanag', usermanag);
 
 //信息修改页面
 app.use('/updatauserinfo', updatauserinfo);
+app.use('/updateuserinfoDAO', updateuserinfoDAO);
 
 
 // catch 404 and forward to error handler

@@ -8,90 +8,107 @@ form.form-horizontal
         .row
             .col-lg-6
                 .col-sm-10
-                    span.label.label-success.tip#tip2(role="alert") #{userinfo.UserID}
-    .form-group
+                    h5#userid #{userinfo.UserID} 
+    .form-group.has-warning.has-feedback
         label.col-sm-2.control-label 姓名
         .row
             .col-lg-6
                 .col-sm-10
-                    span.label.label-success.tip#tip2(role="alert")  #{userinfo.name}
+                    input.form-control#username(type="text" placeholder="慎重修改" value=userinfo.name)
+                    span.glyphicon.glyphicon-warning-sign.form-control-feedback(aria-hidden="true")
+                    span#inputWarning2Status.sr-only (慎重修改)
     .form-group
-        label.col-sm-2.control-label 性别
+        label.col-sm-2.control-label 年龄
         .row
             .col-lg-6
                 .col-sm-10
+                    input.form-control#userage(type="text" placeholder="慎重修改" value=userinfo.age)
+    .form-group
+        label.col-sm-2.control-label 部门
+        .row
+            .col-lg-6
+                .col-sm-10
+                    input.form-control#userdep(type="text" placeholder="部门" value=userinfo.dep)
+    .form-group
+        label.col-sm-2.control-label 职位
+        .row
+            .col-lg-6
+                .col-sm-10
+                    input.form-control#userjob(type="text" placeholder="职位" value=userinfo.job)
+    .form-group
+        label.col-sm-2.control-label 在职
+        .row
+            .col-lg-6
+                .col-sm-10
+                    select.form-control#useronjob
+                        if(userinfo.onjob=='1')
+                            option(selected="selected") 在职
+                            option 离职
+                        if(userinfo.onjob=='-1')
+                            option 在职
+                            option(selected="selected") 离职
+                        
                     
 .form-group
     .row
-            .col-lg-6
-                .col-sm-offset-2.col-sm-10
-                    button.btn.btn-default.navbar-btn(onclick="updatauserinfo()") 提交
-br
+        .col-md-4
+        .col-md-4
+                .col-lg-6
+                    .col-sm-offset-2.col-sm-10
+                        button.btn.btn-info.navbar-btn.btn-lg(onclick="updatauserinfo()") 修改
+        .col-md-4
+    br
 #results
 script.
     $("input").focus(function () {
         $('#error').slideUp()
+        $('.tip').hide()
     });
-    
-    $("#inputPassword3").focus(function () {
-        $('.tip').hide()
-    })
 
-    $("#inputPassword5").focus(function () {
-        $('.tip').hide()
-    })
-
-    $("#inputPassword5").blur(function(){
-        var pw1 = $("#inputPassword4").val();
-        var pw2 = $("#inputPassword5").val();
-        if(pw1!=pw2){
-            $('#tip3').show();
+    //校验输入
+    $("#input").blur(function(){
+        var thisval = this.val();
+        if(!thisval){
+            $('#error').val(输入为空)
+            $('#error').show()
             return;
-        }
-    })
-
-    //原始密码不对立刻返回
-    $("#inputPassword3").blur(function(){
-        var pw = $("#inputPassword3").val();
-        if(!pw){
-            $('#tip1').val("输入为空");
-            $('#tip1').show();
-            return;
-        }
-        $.ajax({
-              url: './updatapwDao', 
-              type: 'POST', 
-              contentType: 'application/json', 
-              data: JSON.stringify({oldpw: pw, checkoldpw: true }),
-              success: function(data) {         
-                //var statcode = JSON.stringify(data)
-                console.log(data)
-                if(data!='20020') $('#tip1').show();
-                if(data=='20020') $('#tip2').show();
-              }     
-        });
+        }    
     })
 
     function updatauserinfo() {
-        var newpw = $("#inputPassword4").val();
-        var newpw1 = $("#inputPassword5").val();
-        if(!newpw||!newpw1){
-            $('#tip4').show();
+        var userid = $("#userid").text();
+        var username = $("#username").val();
+        var userage = $("#userage").val();
+        var userdep = $("#userdep").val();
+        var userjob = $("#userjob").val();
+        var useronjob = $("#useronjob").val();
+        if(!userid||!username||!userage||!userdep||!userjob||!useronjob){
+            console.log(!userid||username||userage||userdep||userjob||useronjob)
             return;
         }
+        if(useronjob=='在职') useronjob = 1
+        else useronjob = -1
         $.ajax({
-              url: './', 
+              url: './updateuserinfoDAO', 
               type: 'POST', 
               contentType: 'application/json', 
-              data: JSON.stringify({newpw: newpw, checkoldpw: false }),
+              data: JSON.stringify({type:'userinfo',userid: userid, username: username, userage: userage, userdep: userdep, userjob: userjob, useronjob: useronjob }),
               success: function(data) {         
                 //var statcode = JSON.stringify(data)
                 console.log(data)
-                if(data==20020){
-                    setTimeout(function(){
-                    window.location.href='./';
-                  },1000);
+                    if(data=='20020'){
+                        $.ajax({
+                            url: './searchuserinfo', 
+                            type: 'POST', 
+                            contentType: 'application/json', 
+                            data: JSON.stringify({sertype: 'UserID', seacontent: userid }),
+                            success: function(data) {         
+                                //var statcode = JSON.stringify(data)
+                                console.log(data)
+                                $('#results').html(data)
+                            }     
+                        });
+                    }
                 }
-              }     
-        });
-    }
+            });
+        }

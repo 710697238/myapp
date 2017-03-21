@@ -5,11 +5,16 @@ var pool = require('./pool.js');
 
 /* GET home page. */
 searchuserinfo.post('/', function (req, res ) {
-  var id=req.body.id;
+  var userid=req.body.userid;
+  var username=req.body.username;
+  var userage=req.body.userage;
+  var userdep=req.body.userdep;
+  var userjob=req.body.userjob;
+  var useronjob=req.body.useronjob;
   var type=req.body.type;
   var strQue = '';
   if(type=='userinfo'){
-    strQue = 'SELECT * FROM userinfo WHERE UserID =' + id
+    strQue = 'UPDATE userinfo SET name=\'' + username + '\', age='+ userage +  ', dep=\'' + userdep + '\', job=\'' + userjob + '\', onjob='+ useronjob + ' WHERE (UserID=' + userid +')'
   }
   console.log(strQue)
   pool.getConnection(function(err, connection) {
@@ -24,17 +29,11 @@ searchuserinfo.post('/', function (req, res ) {
               console.log('Error occurs in Tr, ' + err.stack);
           }else{
              if(rows==""){
-               res.send('没有查到此人信息');
+               res.send('40050');
                
-             }else{
-              if(rows.length>0){
-                //登录成功
-                console.log(rows)
-                res.render('updatauserinfo', { userinfo: rows[0] });
-              }else
-              //没有此人
-              res.send('没有查到此人信息');
-             }       
+             }else{            
+                res.send('20020');
+              }      
               
           }
           connection.release();        

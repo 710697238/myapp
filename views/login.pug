@@ -2,21 +2,31 @@ extends layout
 
 block content
   div.row
-    div.col-md-4
-    div.col-md-4
+    div.col-md-3
+    div.col-md-6
       h1= title
-      p Welcome to #{title}
-      div.alert.alert-danger#loginerror(style="display:none;" role="alert") 
-      div.input-group
-        span.input-group-addon 用户名
-        input.form-control#username(type="text" placeholder="请输入工号" aria-describedby="basic-addon1")
+      p 欢迎使用华软人事资源管理系统
+      form.form-horizontal
+        div.form-group.form-group-lg
+          label.col-sm-2.control-label(for="formGroupInputLarge")
+          .col-sm-7
+            div.alert.alert-danger#loginerror(style="display:none;" role="alert")
+      form.form-horizontal
+        div.form-group.form-group-lg
+          label.col-sm-2.control-label(for="formGroupInputLarge") 用户名
+          .col-sm-7
+            input.form-control#username(type="text" placeholder="请输入工号" aria-describedby="basic-addon1")
+        div.form-group.form-group-lg
+          label.col-sm-2.control-label(for="formGroupInputLarge") 密码
+          .col-sm-7
+            input.form-control#password(type="password" placeholder="请输入密码" aria-describedby="basic-addon1")
       p
-      div.input-group
-        span.input-group-addon 密&nbsp;&nbsp;码
-        input.form-control#password(type="password" placeholder="请输入密码" aria-describedby="basic-addon1")
-      p
-      button.btn.btn-default#loginbtn.navbar-btn(type="button" onclick="login()") 登陆
-    div.col-md-4
+      .row
+        div.col-md-4
+        div.col-md-4
+          button.btn.btn-primary#loginbtn.navbar-btn(type="button" onclick="login()") 登陆
+        div.col-md-4
+    div.col-md-3
               script.
                 $('input').focus(function(){
                   $('#loginerror').slideUp()

@@ -7,7 +7,8 @@ table.table.table-condensed.table-hover
         th 部门
         th 职位
         th 在职
-        th 操作
+        if(roleid<3)
+            th 操作
     each item in userinfo
         tr(id=item.UserID)
             td #{item.UserID}
@@ -23,7 +24,8 @@ table.table.table-condensed.table-hover
                 td 在职
             if(item.onjob=='-1')
                 td.danger 离职
-            td.btn.btn-primary(onclick="updatainfo("+item.UserID+")") 修改
+            if(roleid<3)
+                td.btn.btn-primary(onclick="updatainfo("+item.UserID+")") 修改
 script.
         function updatainfo(id) {
             console.log(id)
