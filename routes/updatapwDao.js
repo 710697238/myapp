@@ -2,6 +2,7 @@ var express = require('express');
 var login = express.Router();
 var pool = require('./pool.js');
 var sessioncheck = require('./sessioncheck');
+var crypto = require('crypto');
 
 /* GET home page. */
 login.post('/', function (req, res ) {
@@ -13,11 +14,16 @@ login.post('/', function (req, res ) {
   var type = req.body.checkoldpw
   if(type){
     var password= req.body.oldpw
+    //对密码md5加密
+    var hashpw = crypto.createHash('md5').update(password).digest('hex');
+    console.log(hashpw)
     var strQue = 'SELECT * FROM Users WHERE UserID='+username +' LIMIT 1'
     console.log(strQue)
   }else{
     var password= req.body.newpw
-    var strQue = 'UPDATE Users SET Password='+ password + ' WHERE UserID= '+ username
+    var hashpw = crypto.createHash('md5').update(password).digest('hex');
+    console.log(hashpw)
+    var strQue = 'UPDATE Users SET Password=\''+ hashpw + '\' WHERE UserID= '+ username
     console.log(strQue)
   }
   
@@ -39,11 +45,12 @@ login.post('/', function (req, res ) {
              }else{
 
               if(!type){
+                //修改成功并退出
                 req.session.destroy();
                 res.send('20020');
               }else{
-                    if(password==rows[0].Password){
-                    //修改成功
+                    if(hashpw==rows[0].Password){
+                    //验证成功
                     res.send('20020');
                 }else
                     res.send('40030');

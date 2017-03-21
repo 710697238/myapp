@@ -1,0 +1,132 @@
+#results    
+    span.label.label-success 当前路径：新增员工
+    br
+    br
+
+    div.alert.alert-danger#error(style="display:none;" role="alert")
+    form.form-horizontal 
+        .form-group
+            label.col-sm-2.control-label 姓名
+            .row
+                .col-lg-6
+                    .col-sm-10
+                        input.form-control#username(type="text" placeholder="员工姓名")
+        .form-group
+            label.col-sm-2.control-label 年龄
+            .row
+                .col-lg-6
+                    .col-sm-10
+                        input.form-control#userage(type="text" placeholder="员工年龄")
+        .form-group
+            label.col-sm-2.control-label 性别
+            .row
+                .col-lg-6
+                    .col-sm-10
+                        select.form-control#usersex
+                            option(selected="selected") 男
+                            option 女
+        .form-group
+            label.col-sm-2.control-label 部门
+            .row
+                .col-lg-6
+                    .col-sm-10
+                        input.form-control#userdep(type="text" placeholder="部门")
+        .form-group
+            label.col-sm-2.control-label 职位
+            .row
+                .col-lg-6
+                    .col-sm-10
+                        input.form-control#userjob(type="text" placeholder="职位")
+        .form-group
+            label.col-sm-2.control-label 在职
+            .row
+                .col-lg-6
+                    .col-sm-10
+                        select.form-control#useronjob
+                            option(selected="selected") 在职
+                            option 离职
+                                        
+    .form-group
+        .row
+            .col-md-4
+            .col-md-4
+                    .col-lg-6
+                        .col-sm-offset-2.col-sm-10
+                            button.btn.btn-info.navbar-btn.btn-lg(onclick="addemplinfo()") 增加
+            .col-md-4
+        br
+
+script.
+    $("input").focus(function () {
+        $('#error').slideUp()
+        $('.tip').hide()
+    });
+
+    //校验输入
+    $("#input").blur(function(){
+        var thisval = this.val();
+        if(!thisval){
+            $('#error').val(输入为空)
+            $('#error').show()
+            return;
+        }    
+    })
+
+    function addemplinfo() {
+        var username = $("#username").val();
+        var userage = $("#userage").val();
+        var usersex = $("#usersex").val();
+        var userdep = $("#userdep").val();
+        var userjob = $("#userjob").val();
+        var useronjob = $("#useronjob").val();
+        if(!username||!userage||!usersex||!userdep||!userjob||!useronjob){
+            console.log(username||userage||usersex||userdep||userjob||useronjob)
+            toastr["warning"]("输入值为空!")
+            return;
+        }
+        if(usersex=='男') usersex = 1
+        else usersex = 2
+        if(useronjob=='在职') useronjob = 1
+        else useronjob = -1
+        $.ajax({
+            url: './updateuserinfoDAO', 
+            type: 'POST', 
+            contentType: 'application/json', 
+            data: JSON.stringify({type:'adduser',username: username, userage: userage, usersex: usersex ,userdep: userdep, userjob: userjob, useronjob: useronjob }),
+            success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                console.log(data)
+                    if(data=='20020'){
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-full-width",
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                            }
+                        toastr["success"]("新增员工成功！")
+                        $.ajax({
+                            url: './searchuserinfo', 
+                            type: 'POST', 
+                            contentType: 'application/json', 
+                            data: JSON.stringify({sertype: 'UserID', seacontent: '' }),
+                            success: function(data) {         
+                                //var statcode = JSON.stringify(data)
+                                console.log(data)
+                                $('#results').html(data)
+                            }     
+                        });
+                    }
+                }
+            });
+        }

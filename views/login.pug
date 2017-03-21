@@ -31,18 +31,35 @@ block content
                 $('input').focus(function(){
                   $('#loginerror').slideUp()
                 })
-                function login() { 
+                function login() {
+                  toastr.options = {
+                  "closeButton": false,
+                  "debug": false,
+                  "newestOnTop": false,
+                  "progressBar": true,
+                  "positionClass": "toast-top-full-width",
+                  "preventDuplicates": false,
+                  "onclick": null,
+                  "showDuration": "300",
+                  "hideDuration": "1000",
+                  "timeOut": "5000",
+                  "extendedTimeOut": "1000",
+                  "showEasing": "swing",
+                  "hideEasing": "linear",
+                  "showMethod": "fadeIn",
+                  "hideMethod": "fadeOut"
+                } 
                   var username = $('#username').val()
                   var password = $('#password').val()
                   if(!username){
                     console.log('登陆失败')
                     $('#loginerror').text('登陆名为空！');
-                    $('#loginerror').show();
+                    toastr["warning"]("登陆名为空！")
                     return;
                   }
                   if(!password){
                     $('#loginerror').text('密码为空！');
-                    $('#loginerror').show();
+                    toastr["warning"]("密码为空！")
                     return;
                   }
                   $.ajax({
@@ -56,17 +73,19 @@ block content
                         if(data==40030){
                             console.log('登陆失败')
                             $('#loginerror').text('密码错误');
-                            $('#loginerror').show();
+                            toastr["error"]("密码错误")
                         }
                         if(data==40050){
                             $('#loginerror').text('用户名不存在');
-                            $('#loginerror').show();
+                            toastr["error"]("用户名不存在")
                         }
                         if(data==50010){
                             $('#loginerror').text('数据库连接失败');
                             $('#loginerror').show();
+                            
                         }
                         if(data==20020){
+                            toastr["success"]("登陆成功，正在跳转...")
                             window.location.href='./';
                         }
                       }     

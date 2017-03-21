@@ -1,12 +1,16 @@
 var express = require('express');
 var login = express.Router();
 var pool = require('./pool.js');
+var crypto = require('crypto');
 
 
 /* GET home page. */
 login.post('/', function (req, res ) {
   var username=req.body.username;
   var password=req.body.password;
+  //对密码md5加密
+  var hashpw = crypto.createHash('md5').update(password).digest('hex');
+  console.log(hashpw)
   var strQue = 'SELECT * FROM Users WHERE UserID='+username +' LIMIT 1'  
   pool.getConnection(function(err, connection) {
       if (err){
@@ -19,11 +23,12 @@ login.post('/', function (req, res ) {
           if (err){
               console.log('Error occurs in Tr, ' + err.stack);
           }else{
+             //数据库密码已经是md5的了
              if(rows==""){
                res.send('40050');
                
              }else{
-              if(password==rows[0].Password){
+              if(hashpw==rows[0].Password){
                 //登录成功
                 console.log("用户名是"+rows[0].UserName)
                 req.session.user = rows[0].UserName;

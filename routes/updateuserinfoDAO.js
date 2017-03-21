@@ -5,7 +5,7 @@ var pool = require('./pool.js');
 
 /* GET home page. */
 searchuserinfo.post('/', function (req, res ) {
-  var userid=req.body.userid;
+  
   var username=req.body.username;
   var userage=req.body.userage;
   var userdep=req.body.userdep;
@@ -14,7 +14,12 @@ searchuserinfo.post('/', function (req, res ) {
   var type=req.body.type;
   var strQue = '';
   if(type=='userinfo'){
+    var userid=req.body.userid;
     strQue = 'UPDATE userinfo SET name=\'' + username + '\', age='+ userage +  ', dep=\'' + userdep + '\', job=\'' + userjob + '\', onjob='+ useronjob + ' WHERE (UserID=' + userid +')'
+  }
+  if(type=='adduser'){  
+    var usersex=req.body.usersex;
+    strQue = 'INSERT INTO userinfo (name, sex, age, dep, job,onjob) VALUES (\'' + username +'\',\'' + usersex +'\',\'' + userage +'\',\'' + userdep +'\',\'' + userjob +'\',\'' + useronjob+'\')'
   }
   console.log(strQue)
   pool.getConnection(function(err, connection) {
