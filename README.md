@@ -2,11 +2,12 @@
 
 > 基本实现了登录，用户权限管理，部分页面验证，增加员工，基础的增删查改都完善了。<br>
 另外，基本的加密存储密码这些都有的，目前系统实用性不强，但可以用作入门express的参考<br>
+尽量往MVC靠拢了，app负责路由转发，jade负责view，js负责M、C，很多命名不规范，两三天快速入门的东西<br>
 看心情去一步步补齐功能了~~
 
 
 ## 系统技术栈
-后端： node + express
+后端： node + express + jade
 
 前端: Bootstrap + JQuery（大量ajax交互）
 
@@ -19,7 +20,7 @@
 #### 系统介绍
 使用该系统，可以方便地进行系统管理，人事档案管理，部门管理，教育培训管理，还能够快捷地查询公司员工的情况
 
-![系统结构](/gitpage/feature1.png "Optional Title")
+![系统结构](/gitpage/feature1.png "系统结构")
 
 ## Demo
 
@@ -57,6 +58,9 @@ $ DEBUG=myapp:* npm start
 然后在浏览器中装入 http://localhost/ 以访问此应用程序
 
 ```
+
+![文件结构](/gitpage/file1.png "文件结构")
+
 
 ## Issues Report
 
