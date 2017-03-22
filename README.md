@@ -1,28 +1,56 @@
 # 基于WEB的人事管理系统
 
+> 基本实现了登录，用户权限管理，部分页面验证，增加员工，基础的增删查改都完善了。<br>
+另外，基本的加密存储密码这些都有的，目前系统实用性不强，但可以用作入门express的参考><br>
+看心情去一步步补齐功能了~~
+
 
 ## 系统技术栈
 后端： node + express
 
-前端: Bootstrap + JQuery
+前端: Bootstrap + JQuery（大量ajax交互）
 
-数据库： mysql
+数据库： mysql(使用了线程池，配置文件在pool.js里面)
 
 适用环境： 全平台 支持IE8+
 
-> 相比Java web ，修改更方便。部署也简单。 
-
-## Demo
-
-## Requirements Install and Usage
-
+> 相比网上很多类似的Java web ，修改更方便。部署也简单。 
 
 #### 系统介绍
 使用该系统，可以方便地进行系统管理，人事档案管理，部门管理，教育培训管理，还能够快捷地查询公司员工的情况
 
 ![系统结构](/gitpage/feature1.png "Optional Title")
 
-#### Feature
+## Demo
+
+## Requirements Install and Usage
+
+```
+$ git clone git@github.com:cncoder/myapp.git
+
+$ cd myapp
+
+$ npm install 
+
+在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
+
+$ DEBUG=myapp:* npm start
+
+在 Windows 上，使用以下命令：
+
+> set DEBUG=myapp:* & npm start
+
+然后在浏览器中装入 http://localhost/ 以访问此应用程序
+
+```
+
+## Issues Report
+
+非常欢迎发issues, 发issues找我聊天都欢迎.
+
+## Feature
+
+**未完待续**
 
 ## License
 
