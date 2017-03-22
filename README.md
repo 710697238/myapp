@@ -9,7 +9,7 @@
 ## 系统技术栈
 后端： node + express + jade
 
-前端: Bootstrap + JQuery（大量ajax交互）
+前端:  Bootstrap + JQuery（大量ajax交互）
 
 数据库： mysql(使用了线程池，配置文件在pool.js里面)
 
@@ -58,6 +58,7 @@ $ DEBUG=myapp:* npm start
 然后在浏览器中装入 http://localhost/ 以访问此应用程序
 
 ```
+<br>
 
 ![文件结构](/gitpage/file1.png "文件结构")
 更多内容请到： [Express 中文官网](http://expressjs.com/zh-cn/)
