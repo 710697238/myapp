@@ -60,6 +60,7 @@ $ DEBUG=myapp:* npm start
 ```
 
 ![文件结构](/gitpage/file1.png "文件结构")
+更多内容请到： [Express 中文官网](http://expressjs.com/zh-cn/)
 
 
 ## Issues Report
@@ -67,6 +68,8 @@ $ DEBUG=myapp:* npm start
 非常欢迎发issues, 发issues找我聊天都欢迎.
 
 ## Feature
+
+* 错误处理
 
 **未完待续**
 
