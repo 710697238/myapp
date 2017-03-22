@@ -23,7 +23,19 @@
 
 ## Demo
 
+部署非常方便
+
+> 在 Windows 上，使用以下命令：
+> set DEBUG=myapp:* & npm start
+
 ![使用1](/gitpage/demo1.gif "Optional Title")
+
+分级用户权限
+
+![使用2](/gitpage/demo2.gif "Optional Title")
+
+更多请部署...
+
 
 ## Requirements Install and Usage
 
