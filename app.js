@@ -23,6 +23,8 @@ var addhrs = require('./routes/addhrs');
 var usermanag = require('./routes/usermanag');
 var updatauserinfo = require('./routes/updatauserinfo');
 var updateuserinfoDAO = require('./routes/updateuserinfoDAO');
+var usermanagDao = require('./routes/usermanagDao');
+var updateusermanag = require('./routes/updateusermanag');
 
 var app = express();
 
@@ -83,6 +85,9 @@ app.use('/addhrs', addhrs);
 
 //系统管理
 app.use('/usermanag', usermanag);
+app.use('/usermanag', usermanag);
+app.use('/usermanagDao', usermanagDao);
+app.use('/updateusermanag', updateusermanag);
 
 //信息修改页面
 app.use('/updatauserinfo', updatauserinfo);

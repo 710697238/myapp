@@ -5,18 +5,11 @@ var pool = require('./pool.js');
 
 /* GET home page. */
 searchuserinfo.post('/', function (req, res ) {
-  
-  var username=req.body.username;
-  var roleid=req.body.roleid;
+  var id=req.body.id;
   var type=req.body.type;
   var strQue = '';
-  if(type=='updatauser'){
-    var userid=req.body.userid;
-    strQue = 'UPDATE users SET UserName=\'' + username + '\', RoleID=\''+ roleid + '\' WHERE (UserID=' + userid +')'
-  }
-  if(type=='adduser'){  
-    var usersex=req.body.usersex;
-    strQue = 'INSERT INTO userinfo (name, sex, age, dep, job,onjob) VALUES (\'' + username +'\',\'' + usersex +'\',\'' + userage +'\',\'' + userdep +'\',\'' + userjob +'\',\'' + useronjob+'\')'
+  if(type=='userinfo'){
+    strQue = 'SELECT * FROM users WHERE UserID =' + id
   }
   console.log(strQue)
   pool.getConnection(function(err, connection) {
@@ -31,11 +24,17 @@ searchuserinfo.post('/', function (req, res ) {
               console.log('Error occurs in Tr, ' + err.stack);
           }else{
              if(rows==""){
-               res.send('40050');
+               res.send('没有查到此人信息');
                
-             }else{            
-                res.send('20020');
-              }      
+             }else{
+              if(rows.length>0){
+                //登录成功
+                console.log(rows)
+                res.render('updatausermanag', { userinfo: rows[0] });
+              }else
+              //没有此人
+              res.send('没有查到此人信息');
+             }       
               
           }
           connection.release();        

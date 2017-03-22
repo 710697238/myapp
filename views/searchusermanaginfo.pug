@@ -1,0 +1,53 @@
+table.table.table-condensed.table-hover
+    tr
+        th 人员ID
+        th 角色属性
+        th 个人档案
+        th 教育培训
+        th 部门管理
+        th 人事调配
+        th 系统管理
+        th 操作
+    each item in userinfo
+        tr(id=item.UserID)
+            td #{item.UserID}
+            if(item.RoleID=='3')
+                td 普通用户
+                td 是
+                td 是
+                td.danger 否
+                td.danger 否
+                td.danger 否
+                
+            if(item.RoleID=='2')
+                td 经理
+                td 是
+                td 是
+                td 是
+                td 是
+                td.danger 否
+                
+            if(item.RoleID=='1')
+                td 超级管理员
+                td 是
+                td 是
+                td 是
+                td 是
+                td 是
+            td.btn.btn-primary(onclick="updatainfo("+item.UserID+")") 修改
+script.
+        function updatainfo(id) {
+            console.log(id)
+            $.ajax({
+              url: './updateusermanag', 
+              type: 'POST', 
+              contentType: 'application/json', 
+              data: JSON.stringify({id: id, type: 'userinfo' }),
+              success: function(data) {         
+                //var statcode = JSON.stringify(data)
+                console.log(data)
+                $('#results').html(data)
+              }     
+        });
+        }
+        
