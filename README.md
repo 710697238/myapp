@@ -58,9 +58,10 @@ $ DEBUG=myapp:* npm start
 然后在浏览器中装入 http://localhost/ 以访问此应用程序
 
 ```
-<br>
+
 
 ![文件结构](/gitpage/file1.png "文件结构")
+<br>
 更多内容请到： [Express 中文官网](http://expressjs.com/zh-cn/)
 
 
