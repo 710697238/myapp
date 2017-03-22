@@ -1,5 +1,5 @@
-# 人力资源管理系统
-基于WEB的人事管理系统
+# 基于WEB的人事管理系统
+
 
 ## 系统技术栈
 后端： node + express
@@ -12,10 +12,17 @@
 
 > 相比Java web ，修改更方便。部署也简单。 
 
+## Demo
+
+## Requirements Install and Usage
+
+
 #### 系统介绍
 使用该系统，可以方便地进行系统管理，人事档案管理，部门管理，教育培训管理，还能够快捷地查询公司员工的情况
 
 ![系统结构](/gitpage/feature1.png "Optional Title")
+
+#### Feature
 
 ## License
 
