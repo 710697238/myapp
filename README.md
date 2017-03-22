@@ -1,7 +1,7 @@
 # 基于WEB的人事管理系统
 
 > 基本实现了登录，用户权限管理，部分页面验证，增加员工，基础的增删查改都完善了。<br>
-另外，基本的加密存储密码这些都有的，目前系统实用性不强，但可以用作入门express的参考><br>
+另外，基本的加密存储密码这些都有的，目前系统实用性不强，但可以用作入门express的参考<br>
 看心情去一步步补齐功能了~~
 
 
@@ -22,6 +22,8 @@
 ![系统结构](/gitpage/feature1.png "Optional Title")
 
 ## Demo
+
+![使用1](/gitpage/demo1.gif "Optional Title")
 
 ## Requirements Install and Usage
 
