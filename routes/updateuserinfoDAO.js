@@ -9,7 +9,15 @@ searchuserinfo.post('/', function (req, res ) {
   var username=req.body.username;
   var roleid=req.body.roleid;
   var type=req.body.type;
+  var userage=req.body.userage;
+  var userdep=req.body.userdep;
+  var userjob=req.body.userjob;
+  var useronjob=req.body.useronjob;
   var strQue = '';
+  if(type=='userinfo'){
+    var userid=req.body.userid;
+    strQue = 'UPDATE userinfo SET name=\'' + username + '\', age='+ userage +  ', dep=\'' + userdep + '\', job=\'' + userjob + '\', onjob='+ useronjob + ' WHERE (UserID=' + userid +')'
+  }
   if(type=='updatauser'){
     var userid=req.body.userid;
     strQue = 'UPDATE users SET UserName=\'' + username + '\', RoleID=\''+ roleid + '\' WHERE (UserID=' + userid +')'
