@@ -48,7 +48,7 @@ app.use(session({
   cookie: {user:"default",maxAge: 14*24*60*60*1000}
 }));
 
-//app.use('/', index);
+app.use('/', index);
 app.use('/login', login);
 
 //教育培训
@@ -95,7 +95,7 @@ app.use('/updatauserinfo', updatauserinfo);
 app.use('/updateuserinfoDAO', updateuserinfoDAO);
 
 //计数器
-app.use('/', addcal);
+//app.use('/', addcal);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
