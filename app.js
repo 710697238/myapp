@@ -25,6 +25,7 @@ var updatauserinfo = require('./routes/updatauserinfo');
 var updateuserinfoDAO = require('./routes/updateuserinfoDAO');
 var usermanagDao = require('./routes/usermanagDao');
 var updateusermanag = require('./routes/updateusermanag');
+var addcal = require('./routes/addcal');
 
 var app = express();
 
@@ -47,7 +48,7 @@ app.use(session({
   cookie: {user:"default",maxAge: 14*24*60*60*1000}
 }));
 
-app.use('/', index);
+//app.use('/', index);
 app.use('/login', login);
 
 //教育培训
@@ -93,6 +94,8 @@ app.use('/updateusermanag', updateusermanag);
 app.use('/updatauserinfo', updatauserinfo);
 app.use('/updateuserinfoDAO', updateuserinfoDAO);
 
+//计数器
+app.use('/', addcal);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
