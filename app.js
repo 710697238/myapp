@@ -25,7 +25,6 @@ var updatauserinfo = require('./routes/updatauserinfo');
 var updateuserinfoDAO = require('./routes/updateuserinfoDAO');
 var usermanagDao = require('./routes/usermanagDao');
 var updateusermanag = require('./routes/updateusermanag');
-var addcal = require('./routes/addcal');
 
 var app = express();
 
@@ -94,8 +93,6 @@ app.use('/updateusermanag', updateusermanag);
 app.use('/updatauserinfo', updatauserinfo);
 app.use('/updateuserinfoDAO', updateuserinfoDAO);
 
-//计数器
-//app.use('/', addcal);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -118,3 +115,9 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+module.exports = (params, callback) => {
+
+	return callback(null, params.args[1] + params.args[2]);
+
+};
