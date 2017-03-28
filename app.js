@@ -115,9 +115,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-module.exports = (params, callback) => {
-
-	return callback(null, params.args[1] + params.args[2]);
-
-};
