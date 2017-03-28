@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var AV = require('leanengine');
 
 var index = require('./routes/index');
 var login = require('./routes/login');
@@ -26,7 +27,15 @@ var updateuserinfoDAO = require('./routes/updateuserinfoDAO');
 var usermanagDao = require('./routes/usermanagDao');
 var updateusermanag = require('./routes/updateusermanag');
 
+AV.init({
+  appId: process.env.LEANCLOUD_APP_ID || 'Fw4t2BqVIawHH3yyEHP1bLK5-gzGzoHsz',
+  appKey: process.env.LEANCLOUD_APP_KEY || 'a9B3g3jeB2GJG0rni98s93nH',
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'pHHnzEj9IgqOH2bDO9nxdTmo'
+});
+
 var app = express();
+
+app.use(AV.express());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
