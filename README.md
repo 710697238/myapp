@@ -69,6 +69,10 @@ $ DEBUG=myapp:* npm start
 
 非常欢迎发issues, 发issues找我聊天都欢迎.
 
+我正在找实习，如果正好你们缺Java或者Node开源人员可以考虑一下 
+
+> [简历 resume](https://github.com/cncoder/resume)
+
 ## Feature
 
 * 错误处理
